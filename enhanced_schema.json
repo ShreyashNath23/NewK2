@@ -1,0 +1,269 @@
+{
+  "meta": {
+    "generated_with": "DBT Unified Schema Generator"
+  },
+  "nodes": [
+    {
+      "id": "project_core.customers",
+      "project": "project_core",
+      "columns": {
+        "customer_id": {
+          "name": "customer_id",
+          "data_type": "int",
+          "ai_description": "Customer_id is a key identifier for customers in the project core."
+        },
+        "signup_date": {
+          "name": "signup_date",
+          "data_type": "date",
+          "ai_description": "Signup_date is a date in the project core."
+        }
+      },
+      "description": "Base customer table",
+      "original_name": "customers"
+    },
+    {
+      "id": "project_core.products",
+      "project": "project_core",
+      "columns": {
+        "product_id": {
+          "name": "product_id",
+          "data_type": "int",
+          "ai_description": "Product_id is a product in the project core."
+        },
+        "price": {
+          "name": "price",
+          "data_type": "numeric",
+          "ai_description": "Price is a numeric metric used to describe the price of products."
+        }
+      },
+      "description": "Product catalog",
+      "original_name": "products"
+    },
+    {
+      "id": "project_core.orders",
+      "project": "project_core",
+      "columns": {
+        "order_id": {
+          "name": "order_id",
+          "data_type": "int",
+          "ai_description": "The order_id of a project core customer is the order_id of the project core product."
+        },
+        "customer_id": {
+          "name": "customer_id",
+          "data_type": "int",
+          "ai_description": "Customers are the customers of the project core."
+        },
+        "product_id": {
+          "name": "product_id",
+          "data_type": "int",
+          "ai_description": "Product_id is a product identifier associated with a customer or project core."
+        }
+      },
+      "description": "Order transactions",
+      "original_name": "orders"
+    },
+    {
+      "id": "project_finance.financial_transactions",
+      "project": "project_finance",
+      "columns": {
+        "transaction_id": {
+          "name": "transaction_id",
+          "data_type": "int",
+          "ai_description": "Transaction_id in model.core.orders"
+        },
+        "order_id": {
+          "name": "order_id",
+          "data_type": "int",
+          "ai_description": "Order_id in model.core.orders"
+        },
+        "payment_amount": {
+          "name": "payment_amount",
+          "data_type": "numeric",
+          "ai_description": "Payment_amount is a numeric digit in the model.core.orders."
+        }
+      },
+      "description": "Financial transactions",
+      "original_name": "financial_transactions"
+    },
+    {
+      "id": "project_finance.monthly_report",
+      "project": "project_finance",
+      "columns": {
+        "month": {
+          "name": "month",
+          "data_type": "date",
+          "ai_description": "Date is the number of days in a month."
+        },
+        "total_sales": {
+          "name": "total_sales",
+          "data_type": "numeric",
+          "ai_description": "Total_sales is a numeric data type that can be used to track monthly_report (project_finance) transactions."
+        }
+      },
+      "description": "Monthly financial report",
+      "original_name": "monthly_report"
+    },
+    {
+      "id": "project_finance.budget_allocation",
+      "project": "project_finance",
+      "columns": {
+        "department": {
+          "name": "department",
+          "data_type": "varchar",
+          "ai_description": "The department is a subset of the model marketing campaign."
+        },
+        "allocated_budget": {
+          "name": "allocated_budget",
+          "data_type": "numeric",
+          "ai_description": "Amount allocated budget is a metric used to measure the amount of money spent on marketing campaigns."
+        }
+      },
+      "description": "Budget allocation analysis",
+      "original_name": "budget_allocation"
+    },
+    {
+      "id": "project_marketing.campaigns",
+      "project": "project_marketing",
+      "columns": {
+        "campaign_id": {
+          "name": "campaign_id",
+          "data_type": "int",
+          "ai_description": "Campaign_id is a customer-facing product."
+        },
+        "customer_segment": {
+          "name": "customer_segment",
+          "data_type": "varchar",
+          "ai_description": "Customer segment is a customer in the model.core.customers."
+        }
+      },
+      "description": "Marketing campaigns",
+      "original_name": "campaigns"
+    },
+    {
+      "id": "project_marketing.customer_segments",
+      "project": "project_marketing",
+      "columns": {
+        "segment_id": {
+          "name": "segment_id",
+          "data_type": "int",
+          "ai_description": "The customer segment is a customer segment in the model.core.customers and model.marketing.campaigns."
+        },
+        "lifetime_value": {
+          "name": "lifetime_value",
+          "data_type": "numeric",
+          "ai_description": "A list of customer segments that have lifetime values."
+        }
+      },
+      "description": "Customer segmentation",
+      "original_name": "customer_segments"
+    },
+    {
+      "id": "project_marketing.revenue_analysis",
+      "project": "project_marketing",
+      "columns": {
+        "campaign_id": {
+          "name": "campaign_id",
+          "data_type": "int",
+          "ai_description": "Campaign_id is a char int of the revenue analysis project marketing model."
+        },
+        "total_revenue": {
+          "name": "total_revenue",
+          "data_type": "numeric",
+          "ai_description": "Total_revenue is the number of units sold by a company in a model."
+        }
+      },
+      "description": "Campaign revenue analysis",
+      "original_name": "revenue_analysis"
+    }
+  ],
+  "edges": [
+    {
+      "source": "project_core.customers",
+      "target": "project_core.orders"
+    },
+    {
+      "source": "project_core.customers",
+      "target": "project_marketing.campaigns"
+    },
+    {
+      "source": "project_core.customers",
+      "target": "project_marketing.customer_segments"
+    },
+    {
+      "source": "project_core.products",
+      "target": "project_core.orders"
+    },
+    {
+      "source": "project_core.orders",
+      "target": "project_finance.financial_transactions"
+    },
+    {
+      "source": "project_core.orders",
+      "target": "project_finance.monthly_report"
+    },
+    {
+      "source": "project_core.orders",
+      "target": "project_marketing.revenue_analysis"
+    },
+    {
+      "source": "project_finance.financial_transactions",
+      "target": "project_finance.monthly_report"
+    },
+    {
+      "source": "project_finance.monthly_report",
+      "target": "project_finance.budget_allocation"
+    },
+    {
+      "source": "project_marketing.campaigns",
+      "target": "project_finance.budget_allocation"
+    },
+    {
+      "source": "project_marketing.campaigns",
+      "target": "project_marketing.customer_segments"
+    },
+    {
+      "source": "project_marketing.campaigns",
+      "target": "project_marketing.revenue_analysis"
+    }
+  ],
+  "ai_descriptions": {
+    "project_core.customers": {
+      "customer_id": "Customer_id is a key identifier for customers in the project core.",
+      "signup_date": "Signup_date is a date in the project core."
+    },
+    "project_core.products": {
+      "product_id": "Product_id is a product in the project core.",
+      "price": "Price is a numeric metric used to describe the price of products."
+    },
+    "project_core.orders": {
+      "order_id": "The order_id of a project core customer is the order_id of the project core product.",
+      "customer_id": "Customers are the customers of the project core.",
+      "product_id": "Product_id is a product identifier associated with a customer or project core."
+    },
+    "project_finance.financial_transactions": {
+      "transaction_id": "Transaction_id in model.core.orders",
+      "order_id": "Order_id in model.core.orders",
+      "payment_amount": "Payment_amount is a numeric digit in the model.core.orders."
+    },
+    "project_finance.monthly_report": {
+      "month": "Date is the number of days in a month.",
+      "total_sales": "Total_sales is a numeric data type that can be used to track monthly_report (project_finance) transactions."
+    },
+    "project_finance.budget_allocation": {
+      "department": "The department is a subset of the model marketing campaign.",
+      "allocated_budget": "Amount allocated budget is a metric used to measure the amount of money spent on marketing campaigns."
+    },
+    "project_marketing.campaigns": {
+      "campaign_id": "Campaign_id is a customer-facing product.",
+      "customer_segment": "Customer segment is a customer in the model.core.customers."
+    },
+    "project_marketing.customer_segments": {
+      "segment_id": "The customer segment is a customer segment in the model.core.customers and model.marketing.campaigns.",
+      "lifetime_value": "A list of customer segments that have lifetime values."
+    },
+    "project_marketing.revenue_analysis": {
+      "campaign_id": "Campaign_id is a char int of the revenue analysis project marketing model.",
+      "total_revenue": "Total_revenue is the number of units sold by a company in a model."
+    }
+  }
+}
